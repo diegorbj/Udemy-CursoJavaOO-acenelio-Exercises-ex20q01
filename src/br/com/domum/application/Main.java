@@ -37,11 +37,18 @@ public class Main {
 
         List<String> emails = employees.stream()
                 .filter(e -> e.getSalary() > salary)
-                .map(Employees::getEmail)
+                .map(e -> e.getEmail())
                 .sorted()
                 .collect(Collectors.toList());
 
         emails.forEach(System.out::println);
+
+        Double sum = employees.stream()
+                .filter(e -> e.getName().charAt(0) == 'M')
+                .map(e -> e.getSalary())
+                .reduce(0.0, (x, y) -> x + y);
+
+        System.out.printf("Sum of salary of people whose name starts with 'M': %.2f%n", sum);
 
         sc.close();
     }
